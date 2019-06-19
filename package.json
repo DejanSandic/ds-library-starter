@@ -1,20 +1,21 @@
 {
 	"name": "ds-library-starter",
 	"version": "1.0.0",
-	"description": "Boilerplate for creating JavaScript libraries with TypeScript",
+	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"prebuild": "rimraf dist",
+		"build": "rollup --config"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/DejanSandic/ds-library-starter.git"
+		"url": ""
 	},
-	"keywords": [ "boilerplate", "javascript", "typescript", "library", "starter", "bundler" ],
-	"author": "Dejan Sandic",
+	"keywords": [],
+	"author": "",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/DejanSandic/ds-library-starter/issues"
+		"url": ""
 	},
-	"homepage": "https://github.com/DejanSandic/ds-library-starter#readme"
+	"homepage": ""
 }
