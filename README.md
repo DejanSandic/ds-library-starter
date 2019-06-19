@@ -127,32 +127,28 @@ module.exports = {
 ## output
 Create the COMMONJS and ESM outputs with inline sourcemaps.
 ```js
-module.exports = {
-   output: [
-      {
-         file: 'dist/index.cjs.js',
-         format: 'cjs',
-         sourcemap: 'inline'
-      },
-      {
-         file: 'dist/index.es.js',
-         format: 'esm',
-         sourcemap: 'inline'
-      }
-   ]
-};
+output: [
+   {
+      file: 'dist/index.cjs.js',
+      format: 'cjs',
+      sourcemap: 'inline'
+   },
+   {
+      file: 'dist/index.es.js',
+      format: 'esm',
+      sourcemap: 'inline'
+   }
+];
 ```
 
 Create the UMD output with lib as the library name  ( window.lib ).
 ```js
-module.exports = {
-   output: [
-      {
-         name: 'lib',
-         file: 'dist/index.umd.js',
-         format: 'umd',
-         sourcemap: 'inline'
-      }
-   ]
-};
+output: [
+   {
+      name: 'lib',
+      file: 'dist/index.umd.js',
+      format: 'umd',
+      sourcemap: 'inline'
+   }
+];
 ```
