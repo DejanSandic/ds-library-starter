@@ -17,5 +17,9 @@
 	"bugs": {
 		"url": ""
 	},
-	"homepage": ""
+	"homepage": "",
+	"devDependencies": {
+		"rimraf": "^2.6.3",
+		"rollup": "^1.15.6"
+	}
 }
