@@ -10,6 +10,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
 -  [.eslintrc.json](#eslintrc)
 -  [.babelrc.json](#babelrc)
 -  [rollup.config.json](#rollup)
+-  [jest.config.json](#jest)
 
 <br><br>
 <a id="package"></a>
@@ -25,11 +26,13 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "umd:main": "dist/index.umd.js",
    "module": "dist/index.es.js",
    "scripts": {
+      "test": "jest --config=jest.config.json",
       "prebuild": "rimraf dist",
       "build": "rollup --config",
       "lint:fix": "prettier-eslint \"src/*\" --write"
    },
    "pre-commit": [
+      "test",
       "lint:fix"
    ],
    "repository": {
@@ -52,6 +55,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
       "eslint-plugin-node": "^9.1.0",
       "eslint-plugin-promise": "^4.1.1",
       "eslint-plugin-standard": "^4.0.0",
+      "jest": "^24.8.0",
       "pre-commit": "^1.2.2",
       "prettier-eslint": "^9.0.0",
       "prettier-eslint-cli": "^5.0.0",
@@ -64,48 +68,51 @@ Boilerplate for creating JavaScript libraries with TypeScript
 ```
 
 Set entry points for the commonjs library which is , ESM and UMD libraries.
-
 ```json
 "main": "dist/index.cjs.js"
 ```
 
 Set entry points for the ESM library which supports tree shaking.
-
 ```json
 "umd:main": "dist/index.umd.js"
 ```
 
 Set entry points for the UMD library which can be used in the browser with the \<script\> tag.
-
 ```json
 "module": "dist/index.es.js"
 ```
 
-Using rimraf package, delete the /dist folder before the build process starts.
+Set the test script to use jest package with the provided config file.
+```json
+"test": "jest --config=jest.config.json",
+```
 
+Using rimraf package, delete the /dist folder before the build process starts.
 ```json
 "prebuild": "rimraf dist"
 ```
 
 Run rollup package with the provided config file ( rollup.config.js is the default ).
-
 ```json
 "build": "rollup --config"
 ```
 
 Run eslint and prettier on each file with the .js extension.
-
 ```json
 "lint:fix": "prettier-eslint \"**/*.js\" --write"
 ```
 
-Run "lint:fix" script before each commit.
-
+Run tests and "lint:fix" script before each commit.
 ```json
 "pre-commit": [
+   "test",
    "lint:fix"
 ]
 ```
+
+
+
+
 
 <br><br>
 <a id="gitignore"></a>
@@ -128,8 +135,11 @@ Add the files you want to exclude from NPM module to the .npmignore file.
 
 ```md
 src/
+test/
 rollup.config.js
 .eslintrc.json
+jest.config.json
+.babelrc
 README.md
 ```
 
@@ -151,19 +161,16 @@ Add the files you want to exclude from NPM module to the .npmignore file.
 ```
 
 Extend the standard eslint configuration.
-
 ```js
 "extends": "standard"
 ```
 
 Set indentation to 3 spaces.
-
 ```js
 "indent": ["error", 3]
 ```
 
 Always use semicolons.
-
 ```js
 "semi": ["error", "always"]
 ```
@@ -178,15 +185,29 @@ Configure babel.
 
 ```json
 {
+   "env": {
+      "test": {
+         "plugins": ["transform-es2015-modules-commonjs"]
+      }
+   },
    "presets": [
       ["@babel/env", {"modules": false}]
    ]
-}
+   }
 ```
 
 Use @babel/env preset.
 ```js
 ["@babel/env", {"modules": false}]
+```
+
+Transform ES6 to the COMMONJS format in the test environment.
+```js
+"env": {
+   "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+   }
+}
 ```
 
 
@@ -263,4 +284,37 @@ babel({ exclude: 'node_modules/**'})
 Minify compiled code.
 ```js
 terser()
+```
+
+
+
+
+<br><br>
+<a id="jest"></a>
+
+# jest.config.json
+
+Configure unit tests with the jest package.
+
+```json
+{
+   "testRegex": "/test/.*",
+   "testEnvironment": "node",
+   "moduleFileExtensions": [ "js" ]
+}
+```
+
+Specify the /test folder.
+```js
+"testRegex": "/test/.*",
+```
+
+Specify test environment.
+```js
+"testEnvironment": "node"
+```
+
+Specify test file extensions for jest.
+```js
+"moduleFileExtensions": [ "js" ]
 ```
