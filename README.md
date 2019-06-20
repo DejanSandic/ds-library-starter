@@ -1,20 +1,20 @@
 # ds-library-starter
+
 Boilerplate for creating JavaScript libraries with TypeScript
 
-
 ### Contents:
-- [package.json](#package)
-- [.gitignore](#gitignore)
-- [.npmignore](#npmignore)
-- [.eslintrc.json](#eslint)
-- [rollup.config.json](#rollup)
 
-
-
+-  [package.json](#package)
+-  [.gitignore](#gitignore)
+-  [.npmignore](#npmignore)
+-  [.eslintrc.json](#eslintrc)
+-  [rollup.config.json](#rollup)
 
 <br><br>
 <a id="package"></a>
+
 # packgage.json
+
 ```json
 {
    "name": "ds-library-starter",
@@ -26,11 +26,9 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "scripts": {
       "prebuild": "rimraf dist",
       "build": "rollup --config",
-      "lint:fix": "prettier-eslint \"**/*.js\" --write"
+      "lint:fix": "prettier-eslint \"src/*\" --write"
    },
-   "pre-commit": [
-      "lint:fix"
-   ],
+   "pre-commit": ["lint:fix"],
    "repository": {
       "type": "git",
       "url": ""
@@ -45,6 +43,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "devDependencies": {
       "rimraf": "^2.6.3",
       "rollup": "^1.15.6",
+      "rollup-plugin-terser": "^5.0.0",
       "eslint": "^5.16.0",
       "eslint-config-standard": "^12.0.0",
       "eslint-plugin-import": "^2.17.3",
@@ -58,61 +57,69 @@ Boilerplate for creating JavaScript libraries with TypeScript
 }
 ```
 
-Set entry points for the commonjs library which is , ESM and UMD libraries. 
+Set entry points for the commonjs library which is , ESM and UMD libraries.
+
 ```json
 "main": "dist/index.cjs.js"
 ```
 
-Set entry points for the ESM library which supports tree shaking. 
+Set entry points for the ESM library which supports tree shaking.
+
 ```json
 "umd:main": "dist/index.umd.js"
 ```
 
-Set entry points for the UMD library which can be used in the browser with the \<script\> tag. 
+Set entry points for the UMD library which can be used in the browser with the \<script\> tag.
+
 ```json
 "module": "dist/index.es.js"
 ```
 
 Using rimraf package, delete the /dist folder before the build process starts.
+
 ```json
 "prebuild": "rimraf dist"
 ```
 
 Run rollup package with the provided config file ( rollup.config.js is the default ).
+
 ```json
 "build": "rollup --config"
 ```
 
 Run eslint and prettier on each file with the .js extension.
+
 ```json
 "lint:fix": "prettier-eslint \"**/*.js\" --write"
 ```
 
 Run "lint:fix" script before each commit.
+
 ```json
 "pre-commit": [
    "lint:fix"
 ]
 ```
 
-
-
-
 <br><br>
 <a id="gitignore"></a>
+
 # .gitignore
+
 Add node_modules and dist folders to the .gitignore file.
+
 ```md
 node_modules
 dist
 ```
 
-
-
 <br><br>
 <a id="npmignore"></a>
+
 # .npmignore
+
 Add the files you want to exclude from NPM module to the .npmignore file.
+
 ```md
 src/
 rollup.config.js
@@ -120,46 +127,50 @@ rollup.config.js
 README.md
 ```
 
-
-
-
 <br><br>
 <a id="eslintrc"></a>
+
 # .eslintrc.json
+
 Add the files you want to exclude from NPM module to the .npmignore file.
+
 ```json
 {
    "extends": "standard",
    "rules": {
-       "indent": ["error", 3],
-       "semi": ["error", "always"]
+      "indent": ["error", 3],
+      "semi": ["error", "always"]
    }
 }
 ```
 
 Extend the standard eslint configuration.
+
 ```js
 "extends": "standard"
 ```
 
 Set indentation to 3 spaces.
+
 ```js
 "indent": ["error", 3]
 ```
 
 Always use semicolons.
+
 ```js
 "semi": ["error", "always"]
 ```
 
-
-
-
 <br><br>
 <a id="rollup"></a>
+
 # rollup.config.js
+
 ```js
-module.exports = {
+import { terser } from 'rollup-plugin-terser';
+
+export default {
    input: 'src/index.js',
    output: [
       {
@@ -178,31 +189,39 @@ module.exports = {
          format: 'umd',
          sourcemap: 'inline'
       }
+   ],
+   plugins: [
+      terser()
    ]
 };
 ```
 
-Set index.js in the /src folder as input. 
+Set index.js in the /src folder as input.
 ```js
-input: 'src/index.js'
+input: 'src/index.js';
 ```
 
 Specify output files for CJS, ESM and UMD formats.
 ```js
-file: 'dist/index.cjs.js' | 'dist/index.es.js' | 'dist/index.umd.js'
+file: 'dist/index.cjs.js' | 'dist/index.es.js' | 'dist/index.umd.js';
 ```
 
 Specify format for each output.
 ```js
-format: 'cjs' | 'esm' | 'umd'
+format: 'cjs' | 'esm' | 'umd';
 ```
 
 Create all outputs with inline source maps.
 ```js
-sourcemap: 'inline'
+sourcemap: 'inline';
 ```
 
-Create the UMD output with lib as the library name  ( window.lib ).
+Create the UMD output with lib as the library name ( window.lib ).
 ```js
-name: 'lib'
+name: 'lib';
+```
+
+Minify compiled code.
+```js
+terser()
 ```

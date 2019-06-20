@@ -1,40 +1,41 @@
 {
-	"name": "ds-library-starter",
-	"version": "1.0.0",
-	"description": "",
-	"main": "dist/index.cjs.js",
-	"umd:main": "dist/index.umd.js",
-	"module": "dist/index.es.js",
-	"scripts": {
-		"prebuild": "rimraf dist",
-		"build": "rollup --config",
-		"lint:fix": "prettier-eslint \"**/*.js\" --write"
-	},
-	"pre-commit": [
-		"lint:fix"
-	],
-	"repository": {
-		"type": "git",
-		"url": ""
-	},
-	"keywords": [],
-	"author": "",
-	"license": "MIT",
-	"bugs": {
-		"url": ""
-	},
-	"homepage": "",
-	"devDependencies": {
-		"rimraf": "^2.6.3",
-		"rollup": "^1.15.6",
-		"eslint": "^5.16.0",
-		"eslint-config-standard": "^12.0.0",
-		"eslint-plugin-import": "^2.17.3",
-		"eslint-plugin-node": "^9.1.0",
-		"eslint-plugin-promise": "^4.1.1",
-		"eslint-plugin-standard": "^4.0.0",
-		"pre-commit": "^1.2.2",
-		"prettier-eslint": "^9.0.0",
-		"prettier-eslint-cli": "^5.0.0"
-	}
+   "name": "ds-library-starter",
+   "version": "1.0.0",
+   "description": "",
+   "main": "dist/index.cjs.js",
+   "umd:main": "dist/index.umd.js",
+   "module": "dist/index.es.js",
+   "scripts": {
+      "prebuild": "rimraf dist",
+      "build": "rollup --config",
+      "lint:fix": "prettier-eslint \"src/*\" --write"
+   },
+   "pre-commit": [
+      "lint:fix"
+   ],
+   "repository": {
+      "type": "git",
+      "url": ""
+   },
+   "keywords": [],
+   "author": "",
+   "license": "MIT",
+   "bugs": {
+      "url": ""
+   },
+   "homepage": "",
+   "devDependencies": {
+      "rimraf": "^2.6.3",
+      "rollup": "^1.15.6",
+      "rollup-plugin-terser": "^5.0.0",
+      "eslint": "^5.16.0",
+      "eslint-config-standard": "^12.0.0",
+      "eslint-plugin-import": "^2.17.3",
+      "eslint-plugin-node": "^9.1.0",
+      "eslint-plugin-promise": "^4.1.1",
+      "eslint-plugin-standard": "^4.0.0",
+      "pre-commit": "^1.2.2",
+      "prettier-eslint": "^9.0.0",
+      "prettier-eslint-cli": "^5.0.0"
+   }
 }
