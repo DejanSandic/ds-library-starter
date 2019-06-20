@@ -8,6 +8,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
 -  [.gitignore](#gitignore)
 -  [.npmignore](#npmignore)
 -  [.eslintrc.json](#eslintrc)
+-  [.babelrc.json](#babelrc)
 -  [rollup.config.json](#rollup)
 
 <br><br>
@@ -28,7 +29,9 @@ Boilerplate for creating JavaScript libraries with TypeScript
       "build": "rollup --config",
       "lint:fix": "prettier-eslint \"src/*\" --write"
    },
-   "pre-commit": ["lint:fix"],
+   "pre-commit": [
+      "lint:fix"
+   ],
    "repository": {
       "type": "git",
       "url": ""
@@ -41,9 +44,8 @@ Boilerplate for creating JavaScript libraries with TypeScript
    },
    "homepage": "",
    "devDependencies": {
-      "rimraf": "^2.6.3",
-      "rollup": "^1.15.6",
-      "rollup-plugin-terser": "^5.0.0",
+      "@babel/core": "^7.4.5",
+      "@babel/preset-env": "^7.4.5",
       "eslint": "^5.16.0",
       "eslint-config-standard": "^12.0.0",
       "eslint-plugin-import": "^2.17.3",
@@ -52,7 +54,11 @@ Boilerplate for creating JavaScript libraries with TypeScript
       "eslint-plugin-standard": "^4.0.0",
       "pre-commit": "^1.2.2",
       "prettier-eslint": "^9.0.0",
-      "prettier-eslint-cli": "^5.0.0"
+      "prettier-eslint-cli": "^5.0.0",
+      "rimraf": "^2.6.3",
+      "rollup": "^1.15.6",
+      "rollup-plugin-babel": "^4.3.2",
+      "rollup-plugin-terser": "^5.0.0"
    }
 }
 ```
@@ -162,6 +168,31 @@ Always use semicolons.
 "semi": ["error", "always"]
 ```
 
+
+
+<br><br>
+<a id="babelrc"></a>
+# .babelrc
+
+Configure babel.
+
+```json
+{
+   "presets": [
+      ["@babel/env", {"modules": false}]
+   ]
+}
+```
+
+Use @babel/env preset.
+```js
+["@babel/env", {"modules": false}]
+```
+
+
+
+
+
 <br><br>
 <a id="rollup"></a>
 
@@ -169,6 +200,7 @@ Always use semicolons.
 
 ```js
 import { terser } from 'rollup-plugin-terser';
+import babel from 'rollup-plugin-babel';
 
 export default {
    input: 'src/index.js',
@@ -191,9 +223,11 @@ export default {
       }
    ],
    plugins: [
+      babel({ exclude: 'node_modules/**'}),
       terser()
    ]
 };
+
 ```
 
 Set index.js in the /src folder as input.
@@ -219,6 +253,11 @@ sourcemap: 'inline';
 Create the UMD output with lib as the library name ( window.lib ).
 ```js
 name: 'lib';
+```
+
+Run babel to transform es6 code.
+```js
+babel({ exclude: 'node_modules/**'})
 ```
 
 Minify compiled code.
