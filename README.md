@@ -12,6 +12,9 @@ Boilerplate for creating JavaScript libraries with TypeScript
 -  [rollup.config.json](#rollup)
 -  [jest.config.json](#jest)
 
+
+
+
 <br><br>
 <a id="package"></a>
 
@@ -126,6 +129,11 @@ node_modules
 dist
 ```
 
+
+
+
+
+
 <br><br>
 <a id="npmignore"></a>
 
@@ -142,6 +150,12 @@ jest.config.json
 .babelrc
 README.md
 ```
+
+
+
+
+
+
 
 <br><br>
 <a id="eslintrc"></a>
@@ -193,12 +207,7 @@ Configure babel.
    "presets": [
       ["@babel/env", {"modules": false}]
    ]
-   }
-```
-
-Use @babel/env preset.
-```js
-["@babel/env", {"modules": false}]
+}
 ```
 
 Transform ES6 to the COMMONJS format in the test environment.
@@ -208,6 +217,11 @@ Transform ES6 to the COMMONJS format in the test environment.
       "plugins": ["transform-es2015-modules-commonjs"]
    }
 }
+```
+
+Use @babel/env preset.
+```js
+["@babel/env", {"modules": false}]
 ```
 
 
