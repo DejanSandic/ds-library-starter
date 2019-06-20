@@ -3,34 +3,16 @@ Boilerplate for creating JavaScript libraries with TypeScript
 
 
 ### Contents:
+- [package.json](#package)
 - [.gitignore](#gitignore)
 - [.npmignore](#npmignore)
-- [package.json](#package)
+- [.eslintrc.json](#eslint)
 - [rollup.config.json](#rollup)
 
 
-<a id="gitignore"></a>
-# .gitignore
-Add node_modules and dist folders to the .gitignore file.
-```md
-node_modules
-dist
-```
 
 
-
-<a id="npmignore"></a>
-# .npmignore
-Add README.md, rollup.config.js and src folder to the .npmignore file.
-```md
-src/
-rollup.config.js
-README.md
-```
-
-
-
-
+<br><br>
 <a id="package"></a>
 # packgage.json
 ```json
@@ -38,11 +20,17 @@ README.md
    "name": "ds-library-starter",
    "version": "1.0.0",
    "description": "",
-   "main": "index.js",
+   "main": "dist/index.cjs.js",
+   "umd:main": "dist/index.umd.js",
+   "module": "dist/index.es.js",
    "scripts": {
       "prebuild": "rimraf dist",
-      "build": "rollup --config"
+      "build": "rollup --config",
+      "lint:fix": "prettier-eslint \"**/*.js\" --write"
    },
+   "pre-commit": [
+      "lint:fix"
+   ],
    "repository": {
       "type": "git",
       "url": ""
@@ -56,7 +44,16 @@ README.md
    "homepage": "",
    "devDependencies": {
       "rimraf": "^2.6.3",
-      "rollup": "^1.15.6"
+      "rollup": "^1.15.6",
+      "eslint": "^5.16.0",
+      "eslint-config-standard": "^12.0.0",
+      "eslint-plugin-import": "^2.17.3",
+      "eslint-plugin-node": "^9.1.0",
+      "eslint-plugin-promise": "^4.1.1",
+      "eslint-plugin-standard": "^4.0.0",
+      "pre-commit": "^1.2.2",
+      "prettier-eslint": "^9.0.0",
+      "prettier-eslint-cli": "^5.0.0"
    }
 }
 ```
@@ -86,9 +83,79 @@ Run rollup package with the provided config file ( rollup.config.js is the defau
 "build": "rollup --config"
 ```
 
+Run eslint and prettier on each file with the .js extension.
+```json
+"lint:fix": "prettier-eslint \"**/*.js\" --write"
+```
+
+Run "lint:fix" script before each commit.
+```json
+"pre-commit": [
+   "lint:fix"
+]
+```
 
 
 
+
+<br><br>
+<a id="gitignore"></a>
+# .gitignore
+Add node_modules and dist folders to the .gitignore file.
+```md
+node_modules
+dist
+```
+
+
+
+<br><br>
+<a id="npmignore"></a>
+# .npmignore
+Add the files you want to exclude from NPM module to the .npmignore file.
+```md
+src/
+rollup.config.js
+.eslintrc.json
+README.md
+```
+
+
+
+
+<br><br>
+<a id="eslintrc"></a>
+# .eslintrc.json
+Add the files you want to exclude from NPM module to the .npmignore file.
+```json
+{
+   "extends": "standard",
+   "rules": {
+       "indent": ["error", 3],
+       "semi": ["error", "always"]
+   }
+}
+```
+
+Extend the standard eslint configuration.
+```js
+"extends": "standard"
+```
+
+Set indentation to 3 spaces.
+```js
+"indent": ["error", 3]
+```
+
+Always use semicolons.
+```js
+"semi": ["error", "always"]
+```
+
+
+
+
+<br><br>
 <a id="rollup"></a>
 # rollup.config.js
 ```js
