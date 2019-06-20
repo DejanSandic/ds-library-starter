@@ -61,30 +61,29 @@ README.md
 }
 ```
 
-## main, umd:main, module
-Set entry points for the CJS, ESM and UMD libraries. 
+Set entry points for the commonjs library which is , ESM and UMD libraries. 
 ```json
-{
-   "main": "dist/index.cjs.js",
-   "umd:main": "dist/index.umd.js",
-   "module": "dist/index.es.js"
-}
+"main": "dist/index.cjs.js"
 ```
 
-## prebuild:
-Delete /dist folder before the build process starts.
+Set entry points for the ESM library which supports tree shaking. 
 ```json
-"scripts": {
-   "prebuild": "rimraf dist",
-}
+"umd:main": "dist/index.umd.js"
 ```
 
-## build:
-Run rollup with the provided config file, rollup.config.js is the default.
+Set entry points for the UMD library which can be used in the browser with the \<script\> tag. 
 ```json
-"scripts": {
-   "build": "rollup --config"
-}
+"module": "dist/index.es.js"
+```
+
+Using rimraf package, delete the /dist folder before the build process starts.
+```json
+"prebuild": "rimraf dist"
+```
+
+Run rollup package with the provided config file ( rollup.config.js is the default ).
+```json
+"build": "rollup --config"
 ```
 
 
@@ -116,39 +115,27 @@ module.exports = {
 };
 ```
 
-## input
 Set index.js in the /src folder as input. 
 ```js
-module.exports = {
-   input: 'src/index.js',
-};
+input: 'src/index.js'
 ```
 
-## output
-Create the COMMONJS and ESM outputs with inline sourcemaps.
+Specify output files for CJS, ESM and UMD formats.
 ```js
-output: [
-   {
-      file: 'dist/index.cjs.js',
-      format: 'cjs',
-      sourcemap: 'inline'
-   },
-   {
-      file: 'dist/index.es.js',
-      format: 'esm',
-      sourcemap: 'inline'
-   }
-];
+file: 'dist/index.cjs.js' | 'dist/index.es.js' | 'dist/index.umd.js'
+```
+
+Specify format for each output.
+```js
+format: 'cjs' | 'esm' | 'umd'
+```
+
+Create all outputs with inline source maps.
+```js
+sourcemap: 'inline'
 ```
 
 Create the UMD output with lib as the library name  ( window.lib ).
 ```js
-output: [
-   {
-      name: 'lib',
-      file: 'dist/index.umd.js',
-      format: 'umd',
-      sourcemap: 'inline'
-   }
-];
+name: 'lib'
 ```
