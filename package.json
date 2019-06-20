@@ -9,7 +9,7 @@
       "test": "jest --config=jest.config.json",
       "prebuild": "rimraf dist",
       "build": "rollup --config",
-      "lint:fix": "prettier-eslint \"src/*\" --write"
+      "lint:fix": "prettier-eslint \"src/*\" \"test/*\" --write"
    },
    "pre-commit": [
       "test",

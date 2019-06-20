@@ -29,7 +29,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
       "test": "jest --config=jest.config.json",
       "prebuild": "rimraf dist",
       "build": "rollup --config",
-      "lint:fix": "prettier-eslint \"src/*\" --write"
+      "lint:fix": "prettier-eslint \"src/*\" \"test/*\" --write"
    },
    "pre-commit": [
       "test",
@@ -97,9 +97,9 @@ Run rollup package with the provided config file ( rollup.config.js is the defau
 "build": "rollup --config"
 ```
 
-Run eslint and prettier on each file with the .js extension.
+Run eslint and prettier on each file in /src and /test folders.
 ```json
-"lint:fix": "prettier-eslint \"**/*.js\" --write"
+"lint:fix": "prettier-eslint \"src/*\" \"test/*\" --write"
 ```
 
 Run tests and "lint:fix" script before each commit.
