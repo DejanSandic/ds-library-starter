@@ -1,5 +1,0 @@
-{
-	"testRegex": "/test/.*",
-	"testEnvironment": "node",
-	"moduleFileExtensions": [ "js" ]
-}

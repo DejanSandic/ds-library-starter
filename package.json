@@ -6,13 +6,16 @@
 	"umd:main": "dist/index.umd.js",
 	"module": "dist/index.es.js",
 	"scripts": {
-		"test": "jest --config=jest.config.json",
+		"test": "jest",
 		"prebuild": "rimraf dist",
 		"build": "rollup --config",
 		"dev": "rollup --config --watch",
 		"lint:fix": "prettier-eslint \"src/*\" \"test/*\" --write"
 	},
-	"pre-commit": [ "test", "lint:fix" ],
+	"pre-commit": [
+		"test",
+		"lint:fix"
+	],
 	"repository": {
 		"type": "git",
 		"url": ""
@@ -25,9 +28,7 @@
 	},
 	"homepage": "",
 	"devDependencies": {
-		"@babel/core": "^7.4.5",
-		"@babel/preset-env": "^7.4.5",
-		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+		"@types/jest": "^24.0.15",
 		"eslint": "^5.16.0",
 		"eslint-config-standard": "^12.0.0",
 		"eslint-plugin-import": "^2.17.3",
@@ -41,6 +42,9 @@
 		"rimraf": "^2.6.3",
 		"rollup": "^1.15.6",
 		"rollup-plugin-babel": "^4.3.2",
-		"rollup-plugin-terser": "^5.0.0"
+		"rollup-plugin-terser": "^5.0.0",
+		"rollup-plugin-typescript2": "^0.22.0",
+		"ts-jest": "^24.0.2",
+		"typescript": "^3.5.3"
 	}
 }
