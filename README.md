@@ -298,3 +298,77 @@ module.exports = {
    }
 };
 ```
+
+
+
+
+
+<br><br>
+<a id="tsconfig"></a>
+
+# tsconfig.json
+
+```json
+{
+   "compilerOptions": {
+      "moduleResolution": "node",
+      "allowJs": false,
+      "target": "es5",
+      "lib": ["dom", "es2015"],
+      "alwaysStrict": true,
+      "allowUnreachableCode": false,
+      "declaration": true,
+      "declarationDir": "dist",
+      "noImplicitAny": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true
+   },
+   "files": ["./src/index.ts"]
+}
+```
+
+Specifiy module resolution strategy.
+```json
+"moduleResolution": "node"
+```
+
+Don't allow JavaScript files to be used in the project.
+```json
+"allowJs": false
+```
+
+Specifiy output JS version to ES5 for better browser support.
+```json
+"target": "es5"
+```
+
+Parse in strict mode and emit 'use strict' for each source file.
+```json
+"alwaysStrict": true
+```
+
+Report errors on unreachable code.
+```json
+"allowUnreachableCode": false
+```
+
+Generate corresponding d.ts files in the /dist directory.
+```json
+"declaration": true,
+"declarationDir": "dist"
+```
+
+Warn on expressions and declarations with an implied 'any' type.
+```json
+"noImplicitAny": true
+```
+
+Emit '__importStar' and '__importDefault' helpers for runtime babel ecosystem compatibility and enable '--allowSyntheticDefaultImports' for typesystem compatibility.
+```json
+"esModuleInterop": true,
+```
+
+Include modules imported with '.json' extension.
+```json
+"resolveJsonModule": true
+```

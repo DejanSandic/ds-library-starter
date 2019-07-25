@@ -1,9 +1,9 @@
 const log = (...args: any) => {
-	console.log(...args);
+   console.log(...args);
 };
 
 export const add = (a: number, b: number) => {
-	return a + b;
+   return a + b;
 };
 
 export default log;
