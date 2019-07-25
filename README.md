@@ -219,6 +219,7 @@ import babel from 'rollup-plugin-babel';
 
 export default {
    input: 'src/index.js',
+   external: [],
    output: [
       {
          file: 'dist/index.cjs.js',
@@ -245,9 +246,19 @@ export default {
 
 ```
 
+
 Set index.js in the /src folder as input.
 ```js
 input: 'src/index.js';
+```
+
+List of external dependencies.
+```js
+external: []
+
+
+// Example
+external: ['jquery', 'lodash']
 ```
 
 Specify output files for CJS, ESM and UMD formats.
@@ -268,6 +279,19 @@ sourcemap: 'inline';
 Create the UMD output with lib as the library name ( window.lib ).
 ```js
 name: 'lib';
+```
+
+List of global variables in the  UMD output.
+```js
+globals: {}
+
+
+// Example
+globals: {
+   jquery: '$',
+   lodash: '_',
+   'react-dom': 'ReactDOM'
+}
 ```
 
 Configure typescript plugin to work without caching.

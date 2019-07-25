@@ -3,6 +3,7 @@ import { terser } from 'rollup-plugin-terser';
 
 export default {
 	input: 'src/index.ts',
+	external: [],
 	output: [
 		{
 			file: 'dist/index.cjs.js',
@@ -18,7 +19,8 @@ export default {
 			name: 'lib',
 			file: 'dist/index.umd.js',
 			format: 'umd',
-			sourcemap: 'inline'
+			sourcemap: 'inline',
+			globals: {}
 		}
 	],
 	plugins: [ typescript({ clean: true }), terser() ]
