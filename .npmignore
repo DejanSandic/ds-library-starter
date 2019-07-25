@@ -5,3 +5,4 @@ rollup.config.js
 jest.config.json
 .babelrc
 README.md
+tsconfig.json
