@@ -44,5 +44,8 @@
 		"ts-jest": "^24.0.2",
 		"typescript": "^3.5.3"
 	},
-	"peerDependencies": {}
+	"peerDependencies": {},
+	"engines": {
+		"node": ">=8"
+	}
 }
