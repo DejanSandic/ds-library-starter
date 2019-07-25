@@ -8,9 +8,9 @@ Boilerplate for creating JavaScript libraries with TypeScript
 -  [.gitignore](#gitignore)
 -  [.npmignore](#npmignore)
 -  [.eslintrc.json](#eslintrc)
--  [.babelrc.json](#babelrc)
 -  [rollup.config.json](#rollup)
--  [jest.config.json](#jest)
+-  [jest.config.js](#jest)
+-  [tsconfig.json](#tsconfig)
 
 
 
@@ -29,9 +29,10 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "umd:main": "dist/index.umd.js",
    "module": "dist/index.es.js",
    "scripts": {
-      "test": "jest --config=jest.config.json",
+      "test": "jest",
       "prebuild": "rimraf dist",
       "build": "rollup --config",
+      "dev": "rollup --config --watch",
       "lint:fix": "prettier-eslint \"src/*\" \"test/*\" --write"
    },
    "pre-commit": [
@@ -50,8 +51,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
    },
    "homepage": "",
    "devDependencies": {
-      "@babel/core": "^7.4.5",
-      "@babel/preset-env": "^7.4.5",
+      "@types/jest": "^24.0.15",
       "eslint": "^5.16.0",
       "eslint-config-standard": "^12.0.0",
       "eslint-plugin-import": "^2.17.3",
@@ -65,17 +65,26 @@ Boilerplate for creating JavaScript libraries with TypeScript
       "rimraf": "^2.6.3",
       "rollup": "^1.15.6",
       "rollup-plugin-babel": "^4.3.2",
-      "rollup-plugin-terser": "^5.0.0"
+      "rollup-plugin-terser": "^5.0.0",
+      "rollup-plugin-typescript2": "^0.22.0",
+      "ts-jest": "^24.0.2",
+      "typescript": "^3.5.3"
    }
 }
+
 ```
 
-Set entry points for the commonjs library which is , ESM and UMD libraries.
+Set entry points for the commonjs library.
 ```json
 "main": "dist/index.cjs.js"
 ```
 
 Set entry points for the ESM library which supports tree shaking.
+```json
+"module": "dist/index.es.js"
+```
+
+Set entry points for the UMD library which can be used in the browser.
 ```json
 "umd:main": "dist/index.umd.js"
 ```
@@ -85,9 +94,9 @@ Set entry points for the UMD library which can be used in the browser with the \
 "module": "dist/index.es.js"
 ```
 
-Set the test script to use jest package with the provided config file.
+Set the test script to use jest package with the default config file.
 ```json
-"test": "jest --config=jest.config.json",
+"test": "jest"
 ```
 
 Using rimraf package, delete the /dist folder before the build process starts.
@@ -98,6 +107,11 @@ Using rimraf package, delete the /dist folder before the build process starts.
 Run rollup package with the provided config file ( rollup.config.js is the default ).
 ```json
 "build": "rollup --config"
+```
+
+Run rollup package after each change ( for development purposes ).
+```json
+"dev": "rollup --config --watch"
 ```
 
 Run eslint and prettier on each file in /src and /test folders.
@@ -149,6 +163,7 @@ rollup.config.js
 jest.config.json
 .babelrc
 README.md
+tsconfig.json
 ```
 
 
@@ -191,41 +206,6 @@ Always use semicolons.
 
 
 
-<br><br>
-<a id="babelrc"></a>
-# .babelrc
-
-Configure babel.
-
-```json
-{
-   "env": {
-      "test": {
-         "plugins": ["transform-es2015-modules-commonjs"]
-      }
-   },
-   "presets": [
-      ["@babel/env", {"modules": false}]
-   ]
-}
-```
-
-Transform ES6 to the COMMONJS format in the test environment.
-```js
-"env": {
-   "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
-   }
-}
-```
-
-Use @babel/env preset.
-```js
-["@babel/env", {"modules": false}]
-```
-
-
-
 
 
 <br><br>
@@ -258,7 +238,7 @@ export default {
       }
    ],
    plugins: [
-      babel({ exclude: 'node_modules/**'}),
+      typescript({ clean: true }),
       terser()
    ]
 };
@@ -290,9 +270,9 @@ Create the UMD output with lib as the library name ( window.lib ).
 name: 'lib';
 ```
 
-Run babel to transform es6 code.
+Configure typescript plugin to work without caching.
 ```js
-babel({ exclude: 'node_modules/**'})
+typescript({ clean: true })
 ```
 
 Minify compiled code.
@@ -308,27 +288,13 @@ terser()
 
 # jest.config.json
 
-Configure unit tests with the jest package.
+Configure unit tests to work with typescript.
 
-```json
-{
-   "testRegex": "/test/.*",
-   "testEnvironment": "node",
-   "moduleFileExtensions": [ "js" ]
-}
-```
-
-Specify the /test folder.
 ```js
-"testRegex": "/test/.*",
-```
-
-Specify test environment.
-```js
-"testEnvironment": "node"
-```
-
-Specify test file extensions for jest.
-```js
-"moduleFileExtensions": [ "js" ]
+module.exports = {
+   roots: [ '<rootDir>/test' ],
+   transform: {
+      '^.+\\.tsx?$': 'ts-jest'
+   }
+};
 ```
