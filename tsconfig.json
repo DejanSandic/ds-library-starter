@@ -10,7 +10,8 @@
 		"declaration": true,
 		"declarationDir": "dist",
 		"noImplicitAny": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"resolveJsonModule": true
 	},
 	"files": ["./src/index.ts"]
 }
