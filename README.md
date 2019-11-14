@@ -27,7 +27,8 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "description": "",
    "main": "dist/index.cjs.js",
    "umd:main": "dist/index.umd.js",
-   "module": "dist/index.es.js",
+   "unpkg": "dist/index.umd.js",
+	"types": "dist/index.d.ts",
    "scripts": {
       "test": "jest",
       "prebuild": "rimraf dist",
@@ -84,14 +85,14 @@ Set entry points for the ESM library which supports tree shaking.
 "module": "dist/index.es.js"
 ```
 
-Set entry points for the UMD library which can be used in the browser.
-```json
-"umd:main": "dist/index.umd.js"
-```
-
 Set entry points for the UMD library which can be used in the browser with the \<script\> tag.
 ```json
-"module": "dist/index.es.js"
+"unpkg": "dist/index.umd.js"
+```
+
+Set path to type declaration file. 
+```json
+"types": "dist/index.d.ts"
 ```
 
 Set the test script to use jest package with the default config file.
