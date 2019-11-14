@@ -1,5 +1,7 @@
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
+import license from 'rollup-plugin-license';
+import path from 'path';
 
 export default {
 	input: 'src/index.ts',
@@ -23,5 +25,16 @@ export default {
 			globals: {}
 		}
 	],
-	plugins: [ typescript({ clean: true }), terser() ]
+	plugins: [
+		typescript({ clean: true }),
+		terser(),
+		license({
+			banner: {
+				content: {
+					file: path.join(__dirname, 'licence'),
+					encoding: 'utf-8'
+				}
+			}
+		})
+	]
 };
