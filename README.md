@@ -243,14 +243,14 @@ export default {
    plugins: [
       typescript({ clean: true }),
       terser({ include: [ /^.+\.umd\.js$/ ] }),
-		license({
-			banner: {
-				content: {
-					file: path.join(__dirname, 'licence'),
-					encoding: 'utf-8'
-				}
-			}
-		})
+      license({
+         banner: {
+            content: {
+               file: path.join(__dirname, 'licence'),
+               encoding: 'utf-8'
+            }
+         }
+      })
    ]
 };
 
