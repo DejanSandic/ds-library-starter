@@ -27,7 +27,7 @@ export default {
 	],
 	plugins: [
 		typescript({ clean: true }),
-		terser(),
+		terser({ include: [ /^.+\.umd\.js$/ ] }),
 		license({
 			banner: {
 				content: {

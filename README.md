@@ -66,7 +66,8 @@ Boilerplate for creating JavaScript libraries with TypeScript
       "rimraf": "^2.6.3",
       "rollup": "^1.15.6",
       "rollup-plugin-babel": "^4.3.2",
-      "rollup-plugin-terser": "^5.0.0",
+      "rollup-plugin-license": "^0.12.1",
+      "rollup-plugin-terser": "5.1.2",
       "rollup-plugin-typescript2": "^0.22.0",
       "ts-jest": "^24.0.2",
       "typescript": "^3.5.3"
@@ -241,7 +242,15 @@ export default {
    ],
    plugins: [
       typescript({ clean: true }),
-      terser()
+      terser({ include: [ /^.+\.umd\.js$/ ] }),
+		license({
+			banner: {
+				content: {
+					file: path.join(__dirname, 'licence'),
+					encoding: 'utf-8'
+				}
+			}
+		})
    ]
 };
 
@@ -300,9 +309,21 @@ Configure typescript plugin to work without caching.
 typescript({ clean: true })
 ```
 
-Minify compiled code.
+Minify compiled code for umd bundle.
 ```js
-terser()
+terser({ include: [ /^.+\.umd\.js$/ ] })
+```
+
+Add licence to all bundles.
+```js
+license({
+   banner: {
+      content: {
+         file: path.join(__dirname, 'licence'),
+         encoding: 'utf-8'
+      }
+   }
+})
 ```
 
 
