@@ -346,7 +346,8 @@ module.exports = {
       "declarationDir": "dist",
       "noImplicitAny": true,
       "esModuleInterop": true,
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "downlevelIteration":true
    },
    "files": ["./src/index.ts"]
 }
@@ -396,4 +397,9 @@ Emit '__importStar' and '__importDefault' helpers for runtime babel ecosystem co
 Include modules imported with '.json' extension.
 ```json
 "resolveJsonModule": true
+```
+
+Allow iteration over objects which implement iterators
+```json
+"downlevelIteration": true
 ```
