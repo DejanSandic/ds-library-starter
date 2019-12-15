@@ -25,7 +25,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "main": "dist/index.cjs.js",
    "umd:main": "dist/index.umd.js",
    "unpkg": "dist/index.umd.js",
-	"types": "dist/index.d.ts",
+   "types": "dist/index.d.ts",
    "scripts": {
       "test": "jest",
       "prebuild": "rimraf dist",
@@ -108,6 +108,7 @@ Add node_modules and dist folders to the .gitignore file.
 ```md
 node_modules
 dist
+coverage
 ```
 
 
@@ -127,10 +128,12 @@ src/
 test/
 rollup.config.js
 .eslintrc.json
-jest.config.json
+jest.config.js
 .babelrc
 README.md
 tsconfig.json
+.prettierignore
+.eslintignore
 ```
 
 
@@ -151,7 +154,8 @@ Add the files you want to exclude from NPM module to the .npmignore file.
    "extends": "standard",
    "rules": {
       "indent": ["error", 3],
-      "semi": ["error", "always"]
+      "semi": ["error", "always"],
+      "max-len": ["error", 120]
    }
 }
 ```
@@ -171,6 +175,11 @@ Always use semicolons.
 "semi": ["error", "always"]
 ```
 
+Set the maximum line length to 120 characters.
+```js
+"max-len": ["error", 120]
+```
+
 
 
 
@@ -181,8 +190,10 @@ Always use semicolons.
 # rollup.config.js
 
 ```js
+import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
-import babel from 'rollup-plugin-babel';
+import license from 'rollup-plugin-license';
+import path from 'path';
 
 export default {
    input: 'src/index.js',
