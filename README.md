@@ -22,9 +22,6 @@ Boilerplate for creating JavaScript libraries with TypeScript
 
 ```json
 {
-   "name": "ds-library-starter",
-   "version": "1.0.0",
-   "description": "",
    "main": "dist/index.cjs.js",
    "umd:main": "dist/index.umd.js",
    "unpkg": "dist/index.umd.js",
@@ -39,39 +36,7 @@ Boilerplate for creating JavaScript libraries with TypeScript
    "pre-commit": [
       "test",
       "lint:fix"
-   ],
-   "repository": {
-      "type": "git",
-      "url": ""
-   },
-   "keywords": [],
-   "author": "",
-   "license": "MIT",
-   "bugs": {
-      "url": ""
-   },
-   "homepage": "",
-   "devDependencies": {
-      "@types/jest": "^24.0.15",
-      "eslint": "^5.16.0",
-      "eslint-config-standard": "^12.0.0",
-      "eslint-plugin-import": "^2.17.3",
-      "eslint-plugin-node": "^9.1.0",
-      "eslint-plugin-promise": "^4.1.1",
-      "eslint-plugin-standard": "^4.0.0",
-      "jest": "^24.8.0",
-      "pre-commit": "^1.2.2",
-      "prettier-eslint": "^9.0.0",
-      "prettier-eslint-cli": "^5.0.0",
-      "rimraf": "^2.6.3",
-      "rollup": "^1.15.6",
-      "rollup-plugin-babel": "^4.3.2",
-      "rollup-plugin-license": "^0.12.1",
-      "rollup-plugin-terser": "5.1.2",
-      "rollup-plugin-typescript2": "^0.22.0",
-      "ts-jest": "^24.0.2",
-      "typescript": "^3.5.3"
-   }
+   ]
 }
 
 ```
