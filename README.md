@@ -213,7 +213,8 @@ export default {
          name: 'lib',
          file: 'dist/index.umd.js',
          format: 'umd',
-         sourcemap: 'inline'
+         sourcemap: 'inline',
+         globals: {}
       }
    ],
    plugins: [
@@ -235,7 +236,7 @@ export default {
 
 Set index.js in the /src folder as input.
 ```js
-input: 'src/index.js';
+input: 'src/index.ts';
 ```
 
 List of external dependencies.
